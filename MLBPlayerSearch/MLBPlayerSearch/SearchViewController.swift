@@ -10,9 +10,12 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+//    MARK: Variables
     var searchController: UISearchController!
     var dataOriginal: [String] = ["Trout", "Betts", "Ryu", "Sam", "Edwin", "Acuna", "Yellich"]
     var dataUpdated: [String] = ["No Results"]
+    var searchTerm: String = ""
+    var isSearched: Bool = false
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
@@ -24,67 +27,85 @@ class SearchViewController: UIViewController {
         setupSearchController()
     }
     
-    func setupEmptyView(){
-        emptyLabel.text = "Enter Player Name"
+    override func viewWillAppear(_ animated: Bool) {
+        setupEmptyView()
+    }
+    
+//    MARK: Functions
+    func emptyViewAppears(){
         emptyView.isHidden = false
         tableView.isHidden = true
     }
     
+    func tableViewAppears(){
+        emptyView.isHidden = true
+        tableView.isHidden = false
+    }
     
+    func setupNoResultsView(searchTerm: String){
+        emptyLabel.text = "No Results for \"\(searchTerm)\""
+        emptyViewAppears()
+    }
     
-//    MARK: filters results with search text
+    func setupEmptyView(){
+        emptyLabel.text = "Enter Player Name"
+        emptyViewAppears()
+    }
+    
     func filterWords(searchTerm: String){
-
-        if searchTerm.count > 0 {
-            dataUpdated = dataOriginal
-            let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
-
-            if filteredResults.count < 1 {
-                dataUpdated.removeAll()
-                dataUpdated.append("No Results for \(searchTerm)")
-                tableView.reloadData()
-            } else {
-
-                dataUpdated = filteredResults
-                tableView.reloadData()
-            }
+        dataUpdated = dataOriginal
+        let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
+        if filteredResults.count > 0 {
+            dataUpdated = filteredResults
+            tableView.reloadData()
+            isSearched = true
+        } else {
+            isSearched = false
         }
-//        } else {
-//            dataUpdated = dataOriginal
-//            tableView.reloadData()
-//        }
     }
 
-//    MARK: restores data to default
     func restoreData(){
         dataUpdated = dataOriginal
         tableView.reloadData()
     }
 }
 
+//MARK: extensions
 extension SearchViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text {
-            filterWords(searchTerm: searchText)
-        } else {
-            restoreData()
-        }
+//        if let searchText = searchController.searchBar.text, searchText.count > 0 {
+//            filterWords(searchTerm: searchText)
+//        } else {
+//            restoreData()
+//            setupEmptyView()
+//        }
     }
 }
 
 extension SearchViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchTerm = searchBar.text ?? ""
         searchController.isActive = false
-        if let searchText = searchBar.text {
-            filterWords(searchTerm: searchText)
+        searchBar.text = searchTerm
+        print("searching for \(searchTerm)")
+        filterWords(searchTerm: searchTerm)
+        if isSearched {
+            tableViewAppears()
+        } else {
+            setupNoResultsView(searchTerm: searchTerm)
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
         restoreData()
+        setupEmptyView()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
     }
 }
 
@@ -116,7 +137,7 @@ extension SearchViewController {
     func setupSearchController(){
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        //        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false

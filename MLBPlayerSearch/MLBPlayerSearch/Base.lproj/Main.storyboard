@@ -77,7 +77,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Ut4-AA-1Rd" firstAttribute="centerY" secondItem="Svx-Jr-le1" secondAttribute="centerY" id="WHC-9h-wzP"/>
                                     <constraint firstItem="Ut4-AA-1Rd" firstAttribute="centerX" secondItem="Svx-Jr-le1" secondAttribute="centerX" id="zMA-LW-vwU"/>
@@ -122,11 +121,11 @@
             </objects>
             <point key="canvasLocation" x="383" y="-35"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="IAT-9C-q0i">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sGQ-XY-pZ3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="05w-Ar-YFF"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" id="05w-Ar-YFF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mqR-IG-Mju">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -144,6 +143,7 @@
     </scenes>
     <resources>
         <image name="favorite" width="32" height="32"/>
+        <image name="search" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>
     </resources>
 </document>
