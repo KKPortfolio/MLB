@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupEmptyView()
     }
     
@@ -71,17 +72,6 @@ class SearchViewController: UIViewController {
 }
 
 //MARK: extensions
-extension SearchViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-//        if let searchText = searchController.searchBar.text, searchText.count > 0 {
-//            filterWords(searchTerm: searchText)
-//        } else {
-//            restoreData()
-//            setupEmptyView()
-//        }
-    }
-}
 
 extension SearchViewController: UISearchBarDelegate{
     
@@ -89,7 +79,6 @@ extension SearchViewController: UISearchBarDelegate{
         searchTerm = searchBar.text ?? ""
         searchController.isActive = false
         searchBar.text = searchTerm
-        print("searching for \(searchTerm)")
         filterWords(searchTerm: searchTerm)
         if isSearched {
             tableViewAppears()
@@ -136,8 +125,6 @@ extension SearchViewController {
     
     func setupSearchController(){
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-//        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
