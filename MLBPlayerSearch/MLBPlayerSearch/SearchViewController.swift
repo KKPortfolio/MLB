@@ -72,12 +72,11 @@ class SearchViewController: UIViewController {
 }
 
 //MARK: extensions
-
 extension SearchViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchTerm = searchBar.text ?? ""
-        searchController.isActive = false
+        searchController.isActive = true
         searchBar.text = searchTerm
         filterWords(searchTerm: searchTerm)
         if isSearched {
@@ -88,13 +87,9 @@ extension SearchViewController: UISearchBarDelegate{
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchController.isActive = false
+        searchController.isActive = true
         restoreData()
         setupEmptyView()
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-
     }
 }
 
