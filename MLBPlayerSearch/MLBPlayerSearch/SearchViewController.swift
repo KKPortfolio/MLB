@@ -87,7 +87,7 @@ extension SearchViewController: UISearchBarDelegate{
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchController.isActive = true
+        searchController.isActive = false
         restoreData()
         setupEmptyView()
     }
