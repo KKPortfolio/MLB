@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
     
 //    MARK: Variables
     var searchController: UISearchController!
-    var dataOriginal: [String] = ["Trout", "Betts", "Ryu", "Sam", "Edwin", "Acuna", "Yellich"]
+    var dataOriginal: [String] = []
     var dataUpdated: [String] = ["No Results"]
     var searchTerm: String = ""
     var isSearched: Bool = false
@@ -20,9 +20,12 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
     
+    let service = PlayerService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEmptyView()
+        fetchingPlayers()
         setupTableView()
         setupSearchController()
     }
@@ -69,6 +72,12 @@ class SearchViewController: UIViewController {
         dataUpdated = dataOriginal
         tableView.reloadData()
     }
+    
+    func fetchingPlayers(){
+        service.fetchPlayers { [weak self] error in
+            guard let self = self else { return }
+        }
+    }
 }
 
 //MARK: extensions
@@ -114,6 +123,9 @@ extension SearchViewController {
     func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
+//        let player = service.player()
+//        print("number of players are \(service.numberOfPlayers)")
+//        dataOriginal.append(player.name ?? "none")
         dataUpdated = dataOriginal
         tableView.reloadData()
     }

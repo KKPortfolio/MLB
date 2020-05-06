@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68051BEE246340810041B33C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BED246340810041B33C /* Request.swift */; };
+		68051BF0246342BA0041B33C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BEF246342BA0041B33C /* NetworkManager.swift */; };
+		68051BF2246343930041B33C /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF1246343930041B33C /* SearchError.swift */; };
+		68051BF5246347680041B33C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF4246347680041B33C /* Player.swift */; };
+		68051BF824634D310041B33C /* PlayersListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF724634D310041B33C /* PlayersListService.swift */; };
 		F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CC8244FD8C8002850FE /* AppDelegate.swift */; };
 		F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CCA244FD8C8002850FE /* SearchViewController.swift */; };
 		F61C9CCE244FD8C8002850FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CCC244FD8C8002850FE /* Main.storyboard */; };
@@ -15,6 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68051BED246340810041B33C /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		68051BEF246342BA0041B33C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		68051BF1246343930041B33C /* SearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchError.swift; sourceTree = "<group>"; };
+		68051BF4246347680041B33C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		68051BF724634D310041B33C /* PlayersListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersListService.swift; sourceTree = "<group>"; };
 		F61C9CC5244FD8C8002850FE /* MLBPlayerSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLBPlayerSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61C9CC8244FD8C8002850FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F61C9CCA244FD8C8002850FE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +45,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68051BEC246340680041B33C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				68051BED246340810041B33C /* Request.swift */,
+				68051BEF246342BA0041B33C /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		68051BF3246347420041B33C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				68051BF4246347680041B33C /* Player.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		68051BF624634D250041B33C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				68051BF724634D310041B33C /* PlayersListService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		681FA9C8246370AD004EE00A /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				68051BF1246343930041B33C /* SearchError.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		F61C9CBC244FD8C8002850FE = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +97,10 @@
 		F61C9CC7244FD8C8002850FE /* MLBPlayerSearch */ = {
 			isa = PBXGroup;
 			children = (
+				681FA9C8246370AD004EE00A /* Constant */,
+				68051BF624634D250041B33C /* Service */,
+				68051BF3246347420041B33C /* Model */,
+				68051BEC246340680041B33C /* Network */,
 				F61C9CC8244FD8C8002850FE /* AppDelegate.swift */,
 				F61C9CCA244FD8C8002850FE /* SearchViewController.swift */,
 				F61C9CCC244FD8C8002850FE /* Main.storyboard */,
@@ -135,7 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68051BF0246342BA0041B33C /* NetworkManager.swift in Sources */,
+				68051BF824634D310041B33C /* PlayersListService.swift in Sources */,
+				68051BF2246343930041B33C /* SearchError.swift in Sources */,
 				F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */,
+				68051BEE246340810041B33C /* Request.swift in Sources */,
+				68051BF5246347680041B33C /* Player.swift in Sources */,
 				F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
