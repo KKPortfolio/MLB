@@ -8,34 +8,38 @@
 
 import Foundation
 
-struct PlayerLists: Decodable {
-    let data: TopData
-    
-    struct TopData: Decodable {
-        let players: [Children]
-        enum CodingKeys: String, CodingKey {
-            case players = "children"
-        }
-        
-        struct Children: Decodable {
-            let player: Player
-            enum CodingKeys: String, CodingKey {
-                case player = "data"
-            }
-        }
-    }
-    
-    var players: [Player] {
-        return data.players.map { $0.player }
-    }
+struct Player {
+    var fetchedData: String?
 }
 
-struct Player: Decodable {
-    let name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case name = "name"
-    }
-}
+//struct PlayerLists: Decodable {
+//    let data: TopData
+//    
+//    struct TopData: Decodable {
+//        let players: [Children]
+//        enum CodingKeys: String, CodingKey {
+//            case players = "children"
+//        }
+//        
+//        struct Children: Decodable {
+//            let player: Player
+//            enum CodingKeys: String, CodingKey {
+//                case player = "data"
+//            }
+//        }
+//    }
+//    
+//    var players: [Player] {
+//        return data.players.map { $0.player }
+//    }
+//}
+//
+//struct Player: Decodable {
+//    let name: String?
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case name = "name"
+//    }
+//}
 
 

@@ -20,12 +20,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
     
-    let service = PlayerService()
+//    let service = PlayerService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEmptyView()
-        fetchingPlayers()
         setupTableView()
         setupSearchController()
     }
@@ -59,13 +58,16 @@ class SearchViewController: UIViewController {
     func filterWords(searchTerm: String){
         dataUpdated = dataOriginal
         let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
-        if filteredResults.count > 0 {
-            dataUpdated = filteredResults
-            tableView.reloadData()
-            isSearched = true
-        } else {
-            isSearched = false
-        }
+        
+//temporarily forcing it to true to see if fetching data from API works
+        //        if filteredResults.count > 0 {
+//            dataUpdated = filteredResults
+//            tableView.reloadData()
+//            isSearched = true
+//        } else {
+//            isSearched = false
+//        }
+        isSearched = true
     }
 
     func restoreData(){
@@ -73,10 +75,12 @@ class SearchViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func fetchingPlayers(){
-        service.fetchPlayers { [weak self] error in
-            guard let self = self else { return }
-        }
+    func fetchingPlayers(searchTerm: String){
+//        service.fetchPlayers { [weak self] error in
+//            guard let self = self else { return }
+//        }
+        NetworkManager.shared.execute(searchTerm: searchTerm)
+        
     }
 }
 
@@ -87,6 +91,7 @@ extension SearchViewController: UISearchBarDelegate{
         searchTerm = searchBar.text ?? ""
         searchController.isActive = true
         searchBar.text = searchTerm
+        fetchingPlayers(searchTerm: searchTerm)
         filterWords(searchTerm: searchTerm)
         if isSearched {
             tableViewAppears()
