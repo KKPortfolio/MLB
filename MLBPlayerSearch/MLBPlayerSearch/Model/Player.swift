@@ -9,7 +9,8 @@
 import Foundation
 
 struct Player {
-    var fetchedData: String?
+    var birthDate: String
+    
 }
 
 //struct PlayerLists: Decodable {

@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
     
+//    non working code
 //    let service = PlayerService()
     
     override func viewDidLoad() {
@@ -56,17 +57,16 @@ class SearchViewController: UIViewController {
     }
     
     func filterWords(searchTerm: String){
-        dataUpdated = dataOriginal
-        let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
-        
-//temporarily forcing it to true to see if fetching data from API works
+        //temporarily forcing it to true to see if fetching data from API works
+        //        dataUpdated = dataOriginal
+        //        let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
         //        if filteredResults.count > 0 {
-//            dataUpdated = filteredResults
-//            tableView.reloadData()
-//            isSearched = true
-//        } else {
-//            isSearched = false
-//        }
+        //            dataUpdated = filteredResults
+        //            tableView.reloadData()
+        //            isSearched = true
+        //        } else {
+        //            isSearched = false
+        //        }
         isSearched = true
     }
 
@@ -76,10 +76,8 @@ class SearchViewController: UIViewController {
     }
     
     func fetchingPlayers(searchTerm: String){
-//        service.fetchPlayers { [weak self] error in
-//            guard let self = self else { return }
-//        }
         NetworkManager.shared.execute(searchTerm: searchTerm)
+        print("hello")
         
     }
 }

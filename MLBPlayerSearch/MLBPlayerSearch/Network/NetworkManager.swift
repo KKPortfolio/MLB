@@ -11,69 +11,23 @@ import UIKit
 class NetworkManager {
     static let shared = NetworkManager()
     var baseURL = "http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='"
+//    use json as completion handler
     func execute(searchTerm: String){
         guard let url = URL(string: "\(baseURL)\(searchTerm)%25'&search_player_all") else { return }
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else { return }
-            let dataString = String(data: data, encoding: .utf8)
-            print("This is the result from API \n\n \(dataString) \n\n")
             do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) as? [ String : Any]
+                if let all = json!["search_player_all"] as? [ String : Any],
+                    let results = all["queryResults"] as? [String : Any],
+                    let row = results["row"] as? [String : Any],
+                    let data = row["team_full"]{
+                    print(row)
+                }
                 
-            } catch let jsonErr {
-                print("Error in serializing JSON: ", jsonErr)
-            }
+                } catch {
+                    print("JSON error: \(error.localizedDescription)")
+                    }
         }.resume()
     }
-    
-    
-//    func genericExecute<T: Decodable>(_ request: APIRequest, completion: @escaping (Result<T, Error>)->()) {
-//        guard let url = URL(string: request.baseURL) else {
-//            completion(.failure(NetworkError.missing("URL")))
-//            return
-//        }
-//
-//        let urlRequest = URLRequest(url: url)
-//        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//
-//            guard let data = data else {
-//                completion(.failure(NetworkError.missing("Data")))
-//                return
-//            }
-//
-//            guard let response = try? JSONDecoder().decode(T.self, from: data) else {
-//                completion(.failure(ParseError.generic))
-//                return
-//            }
-//
-//            completion(.success(response))
-//        }
-//
-//        task.resume()
-//    }
-//
-//    func execute(_ request: APIRequest, completion: @escaping (Result<Data, Error>)->()) {
-//        guard let url = URL(string: request.baseURL) else {
-//            completion(.failure(NetworkError.missing("URL")))
-//            return
-//        }
-//
-//        let urlRequest = URLRequest(url: url)
-//        let task = URLSession.shared.dataTask(with: urlRequest) { data, responseObj, error in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//
-//            guard let data = data else {
-//                completion(.failure(NetworkError.missing("Data")))
-//                return
-//            }
-//            completion(.success(data))
-//        }
-//        task.resume()
-//    }
 }
