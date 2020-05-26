@@ -19,10 +19,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
-    
-//    non working code
-//    let service = PlayerService()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEmptyView()
@@ -76,9 +73,15 @@ class SearchViewController: UIViewController {
     }
     
     func fetchingPlayers(searchTerm: String){
-        NetworkManager.shared.execute(searchTerm: searchTerm)
-        print("hello")
         
+//        NetworkManager.shared.execute(searchTerm: searchTerm) { (result: Data) in
+//            print(result)
+//        }
+        NetworkManager.shared.execute(searchTerm: searchTerm) { (result: Data) in
+            ViewModel.JSONParsing(rawData: result) { (playerObject: Player) in
+                print(playerObject.birth_city!)
+            }
+        }
     }
 }
 
@@ -126,9 +129,6 @@ extension SearchViewController {
     func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-//        let player = service.player()
-//        print("number of players are \(service.numberOfPlayers)")
-//        dataOriginal.append(player.name ?? "none")
         dataUpdated = dataOriginal
         tableView.reloadData()
     }
