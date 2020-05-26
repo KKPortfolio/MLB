@@ -11,8 +11,6 @@ import UIKit
 struct ViewModel {
 
     static func JSONParsing(rawData data:Data?, completion: @escaping (Player) -> ()){
-//        var chosenOne: Player
-        
         if let data = data {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [.mutableContainers]) as? [String:Any]
@@ -23,7 +21,6 @@ struct ViewModel {
                         print("player successfully loaded")
                         completion(chosenOne)
                     }
-                    
                 }
             } catch {
                 print("JSON error: \(error.localizedDescription)")
