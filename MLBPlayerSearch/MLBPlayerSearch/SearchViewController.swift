@@ -74,8 +74,8 @@ class SearchViewController: UIViewController {
     
     func fetchingPlayers(searchTerm: String){
         NetworkManager.shared.execute(searchTerm: searchTerm) { (result: Data) in
-            ViewModel.JSONParsing(rawData: result) { (playerObject: Player) in
-                print(playerObject.birth_city!)
+            ViewModel.JSONParsing(rawData: result) { player in
+                print(player)
             }
         }
     }

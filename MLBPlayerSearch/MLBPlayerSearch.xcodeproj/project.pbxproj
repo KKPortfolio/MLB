@@ -12,6 +12,7 @@
 		68051BF2246343930041B33C /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF1246343930041B33C /* SearchError.swift */; };
 		68051BF5246347680041B33C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF4246347680041B33C /* Player.swift */; };
 		68051BF824634D310041B33C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF724634D310041B33C /* ViewModel.swift */; };
+		E31940D024846E1A00DBA65E /* PlayerCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31940CF24846E1A00DBA65E /* PlayerCodable.swift */; };
 		F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CC8244FD8C8002850FE /* AppDelegate.swift */; };
 		F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CCA244FD8C8002850FE /* SearchViewController.swift */; };
 		F61C9CCE244FD8C8002850FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CCC244FD8C8002850FE /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		68051BF1246343930041B33C /* SearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchError.swift; sourceTree = "<group>"; };
 		68051BF4246347680041B33C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		68051BF724634D310041B33C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		E31940CF24846E1A00DBA65E /* PlayerCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCodable.swift; sourceTree = "<group>"; };
 		F61C9CC5244FD8C8002850FE /* MLBPlayerSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLBPlayerSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61C9CC8244FD8C8002850FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F61C9CCA244FD8C8002850FE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				68051BF4246347680041B33C /* Player.swift */,
+				E31940CF24846E1A00DBA65E /* PlayerCodable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				68051BF2246343930041B33C /* SearchError.swift in Sources */,
 				F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */,
 				68051BEE246340810041B33C /* Request.swift in Sources */,
+				E31940D024846E1A00DBA65E /* PlayerCodable.swift in Sources */,
 				68051BF5246347680041B33C /* Player.swift in Sources */,
 				F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */,
 			);
