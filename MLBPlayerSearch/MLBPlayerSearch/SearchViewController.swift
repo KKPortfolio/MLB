@@ -14,8 +14,11 @@ class SearchViewController: UIViewController {
     var searchController: UISearchController!
     var dataOriginal: [String] = []
     var dataUpdated: [String] = ["No Results"]
-    var searchTerm: String = ""
+    
     var isSearched: Bool = false
+    
+    var searchViewModel = SearchViewModel()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
@@ -43,8 +46,8 @@ class SearchViewController: UIViewController {
         tableView.isHidden = false
     }
     
-    func setupNoResultsView(searchTerm: String){
-        emptyLabel.text = "No Results for \"\(searchTerm)\""
+    func setupNoResultsView(){
+        emptyLabel.text = "No Results for \"\(searchViewModel.searchTerm)\""
         emptyViewAppears()
     }
     
@@ -53,7 +56,7 @@ class SearchViewController: UIViewController {
         emptyViewAppears()
     }
     
-    func filterWords(searchTerm: String){
+    func filterWords(){
         //temporarily forcing it to true to see if fetching data from API works
         //        dataUpdated = dataOriginal
         //        let filteredResults = dataUpdated.filter { $0.lowercased().contains(searchTerm.lowercased())}
@@ -67,63 +70,82 @@ class SearchViewController: UIViewController {
         isSearched = true
     }
 
-    func restoreData(){
-        dataUpdated = dataOriginal
-        tableView.reloadData()
-    }
+//    func restoreData(){
+//        dataUpdated = dataOriginal
+//        tableView.reloadData()
+//    }
     
-    func fetchingPlayers(searchTerm: String){
-        NetworkManager.shared.execute(searchTerm: searchTerm) { (result: Data) in
-            ViewModel.JSONParsing(rawData: result) { player in
-                print(player)
+    func fetchingPlayers() {
+        self.searchViewModel.fetchPlayer { [weak self] error in
+            if let error = error {
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                DispatchQueue.main.async {
+                    self?.present(alertController, animated: true)
+                    //setupNoResultsView
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
             }
         }
     }
 }
 
 //MARK: extensions
-extension SearchViewController: UISearchBarDelegate{
+extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchTerm = searchBar.text ?? ""
+        searchViewModel.searchTerm = searchBar.text ?? ""
         searchController.isActive = true
-        searchBar.text = searchTerm
-        fetchingPlayers(searchTerm: searchTerm)
-        filterWords(searchTerm: searchTerm)
+        searchBar.text = searchViewModel.searchTerm
+        fetchingPlayers()
+        filterWords()
         if isSearched {
             tableViewAppears()
         } else {
-            setupNoResultsView(searchTerm: searchTerm)
+            setupNoResultsView()
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
-        restoreData()
+//        restoreData()
         setupEmptyView()
     }
 }
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataUpdated.count
+        return searchViewModel.numberOfRows
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = dataUpdated[indexPath.row]
+        cell.textLabel?.text = row.rawValue
+
+        switch row {
+        case .position:
+            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.position
+        case .fullName:
+            cell.detailTextLabel?.text = searchViewModel.playerName
+        case .weight:
+            let weight = searchViewModel.searchedPlayer?.weight ?? 0
+            cell.detailTextLabel?.text = "\(weight) lb"
+        case .dob:
+            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.dob
+        }
+        
         return cell
     }
-}
-
-extension SearchViewController: UITableViewDelegate{
-    
 }
 
 extension SearchViewController {
     //    MARK: UISetup
     func setupTableView(){
-        tableView.delegate = self
+//        tableView.delegate = self
         tableView.dataSource = self
         dataUpdated = dataOriginal
         tableView.reloadData()
