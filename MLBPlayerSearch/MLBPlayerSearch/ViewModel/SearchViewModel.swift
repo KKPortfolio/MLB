@@ -34,6 +34,7 @@ class SearchViewModel {
         }
     }
     
+//    to return detailed information to the cell
     func playerDetail(item: String) -> String {
         var detail: String {
             switch item.lowercased() {
@@ -63,21 +64,5 @@ class SearchViewModel {
     var playerName: String? {
         return searchedPlayer?.fullName
     }
-    
-
-    //        switch row {
-    //        case .position:
-    //            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.position
-    //        case .fullName:
-    //            cell.detailTextLabel?.text = searchViewModel.playerName
-    //        case .weight:
-    //            let weight = searchViewModel.searchedPlayer?.weight ?? 0
-    //            cell.detailTextLabel?.text = "\(weight) lb"
-    //        case .dob:
-    //            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.dob
-    //        }
-            
-    
-    
 }
 
