@@ -12,8 +12,6 @@ class SearchViewController: UIViewController {
     
 //    MARK: Variables
     var searchController: UISearchController!
-    var dataOriginal: [String] = []
-    var dataUpdated: [String] = ["No Results"]
     var isSearched: Bool = false
     var searchViewModel = SearchViewModel()
     
@@ -67,11 +65,6 @@ class SearchViewController: UIViewController {
         //        }
         isSearched = true
     }
-
-//    func restoreData(){
-//        dataUpdated = dataOriginal
-//        tableView.reloadData()
-//    }
     
     func fetchingPlayers() {
         self.searchViewModel.fetchPlayer { [weak self] error in
@@ -133,7 +126,6 @@ extension SearchViewController {
     func setupTableView(){
 //        tableView.delegate = self
         tableView.dataSource = self
-//        dataUpdated = dataOriginal
         tableView.reloadData()
     }
     
