@@ -43,8 +43,10 @@ class SearchViewController: UIViewController {
     }
     
     func setupNoResultsView(){
-        emptyLabel.text = "No Results for \"\(searchViewModel.searchTerm)\""
-        emptyViewAppears()
+        DispatchQueue.main.async {
+            self.emptyLabel.text = "No Results for \"\(self.searchViewModel.searchTerm)\""
+            self.emptyViewAppears()
+        }
     }
     
     func setupEmptyView(){
@@ -70,13 +72,15 @@ class SearchViewController: UIViewController {
         self.searchViewModel.fetchPlayer { [weak self] error in
             if let error = error {
                 let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Got it!", style: .default, handler: { (action: UIAlertAction! ) in
+//                    to do something when button is pressed
+                }))
                 DispatchQueue.main.async {
                     self?.present(alertController, animated: true)
-                    //setupNoResultsView
+                    self?.setupNoResultsView()
                 }
                 return
             }
-            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -121,10 +125,16 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
 extension SearchViewController {
     //    MARK: UISetup
     func setupTableView(){
-//        tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
     }

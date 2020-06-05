@@ -12,9 +12,22 @@ class SearchViewModel {
 
     enum PlayerInfo: String, CaseIterable {
         case position = "Position"
-        case fullName = "Name"
         case weight = "Weight"
-        case dob = "Date of Birth"
+        case birth_date = "Date of Birth"
+        case birth_country = "Country of Birth"
+        case birth_state = "State of Birth"
+        case nameFirstAndLast = "Name"
+        case college = "College"
+        case bats = "Bats"
+        case team_code = "Team Code"
+        case birth_city = "Birth City"
+        case height_feet = "Height (in feet)"
+        case pro_debut_date = "Debut Date"
+        case team_full = "Team"
+        case throwing_arm = "Throwing Arm"
+        case leauge = "League"
+        case high_school = "High School"
+        
     }
     
     var searchedPlayer: PlayerCodable?
@@ -41,11 +54,35 @@ class SearchViewModel {
             case "position":
                 return self.searchedPlayer?.position ?? ""
             case "name":
-                return self.searchedPlayer?.fullName ?? ""
+                return self.searchedPlayer?.name_display_first_last ?? ""
             case "weight":
                 return "\(self.searchedPlayer?.weight ?? 0) lb"
             case "date of birth":
-                return self.searchedPlayer?.dob ?? ""
+                return self.searchedPlayer?.birth_date ?? ""
+            case "country of birth":
+                return self.searchedPlayer?.birth_country ?? ""
+            case "state of birth":
+                return self.searchedPlayer?.birth_state ?? ""
+            case "college":
+                return self.searchedPlayer?.college ?? ""
+            case "bats":
+                return self.searchedPlayer?.bats ?? ""
+            case "team code":
+                return self.searchedPlayer?.team_code ?? ""
+            case "birth city":
+                return self.searchedPlayer?.birth_city ?? ""
+            case "Height (in feet)":
+                return "\(self.searchedPlayer?.height_feet ?? 0)"
+            case "debut date":
+                return self.searchedPlayer?.pro_debut_date ?? ""
+            case "team":
+                return self.searchedPlayer?.team_full ?? ""
+            case "throwing arm":
+                return self.searchedPlayer?.throwing_arm ?? ""
+            case "leage":
+                return self.searchedPlayer?.league ?? ""
+            case "high school":
+                return self.searchedPlayer?.high_school ?? ""
             default:
                 return "No Value"
             }
@@ -62,7 +99,7 @@ class SearchViewModel {
     }
     
     var playerName: String? {
-        return searchedPlayer?.fullName
+        return searchedPlayer?.name_display_last_first
     }
 }
 
