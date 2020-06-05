@@ -2,7 +2,7 @@
 //  SearchError.swift
 //  MLBPlayerSearch
 //
-//  Created by King Kurt on 2020-05-06.
+//  Created by Kurt Kim on 2020-05-06.
 //  Copyright © 2020 KK. All rights reserved.
 //
 

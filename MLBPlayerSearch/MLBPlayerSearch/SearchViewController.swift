@@ -14,9 +14,7 @@ class SearchViewController: UIViewController {
     var searchController: UISearchController!
     var dataOriginal: [String] = []
     var dataUpdated: [String] = ["No Results"]
-    
     var isSearched: Bool = false
-    
     var searchViewModel = SearchViewModel()
     
     @IBOutlet weak var tableView: UITableView!
@@ -125,19 +123,7 @@ extension SearchViewController: UITableViewDataSource {
         let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = row.rawValue
-
-        switch row {
-        case .position:
-            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.position
-        case .fullName:
-            cell.detailTextLabel?.text = searchViewModel.playerName
-        case .weight:
-            let weight = searchViewModel.searchedPlayer?.weight ?? 0
-            cell.detailTextLabel?.text = "\(weight) lb"
-        case .dob:
-            cell.detailTextLabel?.text = searchViewModel.searchedPlayer?.dob
-        }
-        
+        cell.detailTextLabel?.text = searchViewModel.playerDetail(item: row.rawValue)
         return cell
     }
 }
@@ -147,7 +133,7 @@ extension SearchViewController {
     func setupTableView(){
 //        tableView.delegate = self
         tableView.dataSource = self
-        dataUpdated = dataOriginal
+//        dataUpdated = dataOriginal
         tableView.reloadData()
     }
     
