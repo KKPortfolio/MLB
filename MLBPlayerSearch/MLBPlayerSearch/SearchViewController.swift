@@ -21,6 +21,7 @@ class SearchViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
         setupEmptyView()
         setupTableView()
         setupSearchController()
@@ -43,14 +44,12 @@ class SearchViewController: UIViewController {
     }
     
     func setupNoResultsView(){
-        DispatchQueue.main.async {
-            self.emptyLabel.text = "No Results for \"\(self.searchViewModel.searchTerm)\""
-            self.emptyViewAppears()
-        }
+        self.emptyLabel.text = "No Results for \"\(self.searchViewModel.searchTerm)\""
+        self.emptyViewAppears()
     }
     
     func setupEmptyView(){
-        emptyLabel.text = "Enter Player Name"
+        emptyLabel.text = ""
         emptyViewAppears()
     }
     
@@ -142,7 +141,12 @@ extension SearchViewController {
     func setupSearchController(){
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Enter Player Name"
+        searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.title = "MLB Players"
+        
+        
     }
 }
