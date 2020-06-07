@@ -10,14 +10,36 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
+
+    var api = "http://lookup-service-prod.mlb.com"
+    var endpoint = "/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part="
+    var postURLString: String?
     
-    var baseURL = "http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='"
     func execute(searchTerm: String, completion: @escaping (Data) -> ()) {
-        let url  = "\(baseURL)\(searchTerm)%25'&search_player_all"
-        let request = URLRequest(url: URL(string: url)!)
-        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-            completion(data!)
+        let searchTermSplit = searchTerm.split(separator: " ")
+        if searchTermSplit.count != 1 {
+            let urlString = "\(api)\(endpoint)'\(searchTermSplit[0])%20\(searchTermSplit[1])'"
+            if let url = URL(string: urlString) {
+                let request = URLRequest(url: url)
+                let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+                    completion(data!)
+                }
+                task.resume()
+            } else {
+                print("could not open url, it was nil")
+            }
+        } else {
+            let urlString = "\(api)\(endpoint)'\(searchTermSplit[0])%25'"
+            if let url = URL(string: urlString) {
+                let request = URLRequest(url: url)
+                let task = URLSession.shared.dataTask(with: request) {(data: Data?, response: URLResponse?, error: Error?) in
+                    completion(data!)
+                }
+                task.resume()
+            } else {
+                print("could not open url, it was nil")
+            }
         }
-        task.resume()
+        
     }
 }
