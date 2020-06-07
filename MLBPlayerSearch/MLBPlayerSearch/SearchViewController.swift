@@ -92,8 +92,17 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchViewModel.searchTerm = searchBar.text?.lowercased() ?? ""
-        let flag = searchBar.text?.lowercased().split(separator: " ").count
-        if flag! > 2 || flag! < 1 {
+        if searchViewModel.searchTermValidater() {
+            searchController.isActive = true
+            searchBar.text = searchViewModel.searchTerm
+            fetchingPlayers()
+            filterWords()
+            if isSearched {
+                tableViewAppears()
+            } else {
+                setupNoResultsView()
+            }
+        } else {
             let alertController = UIAlertController(title: "Error", message: "Enter first and last name \n or last name only", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Got It!", style: .default, handler: { (action: UIAlertAction!) in
             }))
@@ -101,16 +110,6 @@ extension SearchViewController: UISearchBarDelegate {
                 self.present(alertController, animated: true)
                 self.setupNoResultsView()
             }
-            return
-        }
-        searchController.isActive = true
-        searchBar.text = searchViewModel.searchTerm
-        fetchingPlayers()
-        filterWords()
-        if isSearched {
-            tableViewAppears()
-        } else {
-            setupNoResultsView()
         }
     }
 

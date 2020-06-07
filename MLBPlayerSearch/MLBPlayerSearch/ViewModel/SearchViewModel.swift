@@ -47,6 +47,15 @@ class SearchViewModel {
         }
     }
     
+    func searchTermValidater() -> Bool {
+        let flag = searchTerm.lowercased().split(separator: " ").count
+        if flag > 2 || flag < 1 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
 //    to return detailed information to the cell
     func playerDetail(item: String) -> String {
         var detail: String {
