@@ -32,6 +32,7 @@ class SearchViewModel {
     
     var searchedPlayer: PlayerCodable?
     var searchTerm: String = ""
+    var listOfSearches: [String] = []
 
 //    Functions
     func fetchPlayer(completion: @escaping (Error?) -> ()) {
@@ -47,8 +48,21 @@ class SearchViewModel {
         }
     }
     
+    func saveSearchHistory(){
+        let isSucessfulSave = NSKeyedArchiver.archiveRootObject(listOfSearches, toFile: SearchHistory.archiveURL.path)
+        if !isSucessfulSave {
+            print("Failed to save search history")
+        }
+    }
+    
+    func loadSearchHistory() -> [String]?{
+        return NSKeyedUnarchiver.unarchiveObject(withFile: SearchHistory.archiveURL.path) as? [String]
+    }
+    
     func searchTermValidater() -> Bool {
-        let flag = searchTerm.lowercased().split(separator: " ").count
+        self.listOfSearches.append(self.searchTerm)
+        self.saveSearchHistory()
+        let flag = self.searchTerm.lowercased().split(separator: " ").count
         if flag > 2 || flag < 1 {
             return false
         } else {
