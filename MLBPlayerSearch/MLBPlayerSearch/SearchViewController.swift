@@ -22,12 +22,12 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var recentView: UITableView!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setupSearchController()
         setupTableView()
         setupRecentView()
-        setupSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,15 +133,30 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: UITableView
 extension SearchViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView == self.tableView {
+            return 1
+        } else {
+            return 2
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return searchViewModel.numberOfRows
         } else {
-            return searchHistory.listOfSearches!.count
+            let numberOfRowsForSection: [Int] = [1, searchHistory.listOfSearches!.count]
+            var numberOfRows: Int = 0
+            if section < numberOfRowsForSection.count {
+                numberOfRows = numberOfRowsForSection[section]
+            }
+            return numberOfRows
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
             let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
@@ -150,10 +165,19 @@ extension SearchViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = searchViewModel.playerDetail(item: row.rawValue)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Recent", for: indexPath)
-            cell.textLabel?.text = searchHistory.listOfSearches![indexPath.row]
-            cell.detailTextLabel?.text = ""
-            return cell
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Recent", for: indexPath)
+                cell.textLabel?.text = "Recent Searches"
+                cell.textLabel?.font = UIFont (name: "Helvetica-Bold", size: 24)
+                cell.detailTextLabel?.text = ""
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Recent", for: indexPath)
+                cell.textLabel?.text = searchHistory.listOfSearches![indexPath.row]
+                cell.detailTextLabel?.text = ""
+                return cell
+            }
+            
         }
     }
 }
@@ -184,10 +208,9 @@ extension SearchViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Enter Player Name"
         searchController.obscuresBackgroundDuringPresentation = false
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.title = "MLB Players"
-        
-        
     }
 }

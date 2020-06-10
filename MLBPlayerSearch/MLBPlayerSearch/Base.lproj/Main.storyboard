@@ -116,9 +116,14 @@
                                 </connections>
                             </tableView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XJk-EQ-t9z" userLabel="recentView">
-                                <rect key="frame" x="0.0" y="85" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="194" width="375" height="532"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Zk2-KR-eAa">
+                                    <rect key="frame" x="0.0" y="99.666667938232422" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Recent" textLabel="Ixs-L8-5GH" detailTextLabel="dhZ-Jf-T3d" style="IBUITableViewCellStyleValue1" id="Ff2-bv-vaK">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
@@ -173,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNs-os-569" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="383" y="-35"/>
+            <point key="canvasLocation" x="381.60000000000002" y="-35.467980295566505"/>
         </scene>
         <!--Search-->
         <scene sceneID="IAT-9C-q0i">
