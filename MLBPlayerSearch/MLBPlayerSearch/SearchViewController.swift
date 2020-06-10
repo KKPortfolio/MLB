@@ -26,15 +26,27 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        setupTableView()
-        setupRecentView()
+        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
+        if searchHistory.listOfSearches == nil {
+            setupEmptyView()
+            emptyViewAppears()
+        } else {
+            setupRecentView()
+            recentViewAppears()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
-        setupRecentView()
-        print(searchHistory.listOfSearches!)
+        if searchHistory.listOfSearches == nil {
+            setupEmptyView()
+            emptyViewAppears()
+        } else {
+            setupRecentView()
+            recentViewAppears()
+            print(searchHistory.listOfSearches!)
+        }
     }
     
 //    MARK: Functions
@@ -54,16 +66,6 @@ class SearchViewController: UIViewController {
         emptyView.isHidden = true
         tableView.isHidden = true
         recentView.isHidden = false
-    }
-    
-    func setupNoResultsView(){
-        self.emptyLabel.text = "No Results for \"\(self.searchViewModel.searchTerm)\""
-        self.emptyViewAppears()
-    }
-    
-    func setupEmptyView(){
-        emptyLabel.text = ""
-        emptyViewAppears()
     }
     
     func filterWords(){
@@ -128,8 +130,10 @@ extension SearchViewController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
+        searchViewModel.saveSearchHistory()
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
         setupRecentView()
+        recentViewAppears()
     }
 }
 
@@ -148,12 +152,16 @@ extension SearchViewController: UITableViewDataSource {
         if tableView == self.tableView {
             return searchViewModel.numberOfRows
         } else {
-            let numberOfRowsForSection: [Int] = [1, searchHistory.listOfSearches!.count]
-            var numberOfRows: Int = 0
-            if section < numberOfRowsForSection.count {
-                numberOfRows = numberOfRowsForSection[section]
+            if searchHistory.listOfSearches == nil {
+                return 0
+            } else {
+                let numberOfRowsForSection: [Int] = [1, searchHistory.listOfSearches!.count]
+                var numberOfRows: Int = 0
+                if section < numberOfRowsForSection.count {
+                    numberOfRows = numberOfRowsForSection[section]
+                }
+                return numberOfRows
             }
-            return numberOfRows
         }
     }
     
@@ -200,7 +208,15 @@ extension SearchViewController {
         recentView.delegate = self
         recentView.dataSource = self
         recentView.reloadData()
-        recentViewAppears()
+    }
+    
+    func setupNoResultsView(){
+        self.emptyLabel.text = "No Results for \"\(self.searchViewModel.searchTerm)\""
+        self.emptyViewAppears()
+    }
+    
+    func setupEmptyView(){
+        emptyLabel.text = "Search the Player"
     }
     
     func setupSearchController(){

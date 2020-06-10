@@ -56,12 +56,13 @@ class SearchViewModel {
     }
     
     func loadSearchHistory() -> [String]?{
+        guard let savedData = NSKeyedUnarchiver.unarchiveObject(withFile: SearchHistory.archiveURL.path) as? [String] else { return nil}
+        self.listOfSearches = savedData
         return NSKeyedUnarchiver.unarchiveObject(withFile: SearchHistory.archiveURL.path) as? [String]
     }
     
     func searchTermValidater() -> Bool {
         self.listOfSearches.append(self.searchTerm)
-        self.saveSearchHistory()
         let flag = self.searchTerm.lowercased().split(separator: " ").count
         if flag > 2 || flag < 1 {
             return false
