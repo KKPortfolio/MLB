@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
+        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
             setupEmptyView()
             emptyViewAppears()
@@ -38,7 +38,7 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
+        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
             setupEmptyView()
             emptyViewAppears()
@@ -131,7 +131,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
         searchViewModel.saveSearchHistory()
-        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()
+        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         setupRecentView()
         recentViewAppears()
     }
