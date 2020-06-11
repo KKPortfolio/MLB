@@ -16,12 +16,10 @@ class SearchViewController: UIViewController {
     var searchViewModel = SearchViewModel()
     var searchHistory = SearchHistory()
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var playerDetailView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var recentView: UITableView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,26 +43,25 @@ class SearchViewController: UIViewController {
         } else {
             setupRecentView()
             recentViewAppears()
-            print(searchHistory.listOfSearches!)
         }
     }
     
 //    MARK: Functions
     func emptyViewAppears(){
         emptyView.isHidden = false
-        tableView.isHidden = true
+        playerDetailView.isHidden = true
         recentView.isHidden = true
     }
     
     func tableViewAppears(){
         emptyView.isHidden = true
-        tableView.isHidden = false
+        playerDetailView.isHidden = false
         recentView.isHidden = true
     }
     
     func recentViewAppears(){
         emptyView.isHidden = true
-        tableView.isHidden = true
+        playerDetailView.isHidden = true
         recentView.isHidden = false
     }
     
@@ -96,7 +93,7 @@ class SearchViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self?.playerDetailView.reloadData()
             }
         }
     }
@@ -113,6 +110,7 @@ extension SearchViewController: UISearchBarDelegate {
             fetchingPlayers()
             filterWords()
             if isSearched {
+                setupTableView()
                 tableViewAppears()
             } else {
                 setupNoResultsView()
@@ -141,7 +139,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView == self.tableView {
+        if tableView == self.playerDetailView {
             return 1
         } else {
             return 2
@@ -149,7 +147,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
+        if tableView == self.playerDetailView {
             return searchViewModel.numberOfRows
         } else {
             if searchHistory.listOfSearches == nil {
@@ -166,7 +164,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.tableView {
+        if tableView == self.playerDetailView {
             let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel?.text = row.rawValue
@@ -185,23 +183,32 @@ extension SearchViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = ""
                 return cell
             }
-            
         }
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        if tableView == playerDetailView {
+            self.playerDetailView.deselectRow(at: indexPath, animated: true)
+        } else if tableView == recentView {
+            self.recentView.deselectRow(at: indexPath, animated: true)
+            searchController.isActive = true
+            guard let searchTerm = recentView.cellForRow(at: indexPath)?.textLabel?.text else { return }
+            searchViewModel.searchTerm = searchTerm
+            fetchingPlayers()
+            setupTableView()
+            tableViewAppears()
+        }
     }
 }
 
 extension SearchViewController {
     //    MARK: UISetup
     func setupTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
+        playerDetailView.delegate = self
+        playerDetailView.dataSource = self
+        playerDetailView.reloadData()
     }
     
     func setupRecentView(){
