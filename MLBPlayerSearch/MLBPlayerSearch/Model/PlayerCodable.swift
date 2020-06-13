@@ -38,6 +38,7 @@ struct PlayerCodable: Decodable {
     let team_id: Int?
     let service_years: Int?
     let active_sw: String?
+    var height: String = ""
     
     enum CodingKeys: String, CodingKey {
         case searchPlayerAll = "search_player_all"
@@ -113,5 +114,10 @@ struct PlayerCodable: Decodable {
         birth_date = DateFormatter.mmmddyyyFormat(from: dobString)
         let debutDateString = try rowContainer.decode(String.self, forKey: .pro_debut_date)
         pro_debut_date = DateFormatter.mmmddyyyFormat(from: debutDateString)
+        
+        guard let feet = height_feet else { return }
+        guard let inches = height_inches else { return }
+        
+        height = "\(Int(feet))\"\(Int(inches))\'"
     }
 }

@@ -11,22 +11,24 @@ import UIKit
 class SearchViewModel {
 
     enum PlayerInfo: String, CaseIterable {
-        case position = "Position"
-        case weight = "Weight"
-        case birth_date = "Date of Birth"
-        case birth_country = "Country of Birth"
-        case birth_state = "State of Birth"
         case nameFirstAndLast = "Name"
-        case college = "College"
-        case bats = "Bats"
-        case team_code = "Team Code"
-        case birth_city = "Birth City"
-        case height_feet = "Height (in feet)"
-        case pro_debut_date = "Debut Date"
-        case team_full = "Team"
+        case birth_date = "Date of Birth"
+        case height = "Height"
+        case weight = "Weight"
+        case birth_country = "Country of Birth"
+        case position = "Position"
         case throwing_arm = "Throwing Arm"
+        case bats = "Bats"
         case leauge = "League"
-        case high_school = "High School"
+        case team_full = "Team"
+        case pro_debut_date = "Debut Date"
+        case college = "College"
+//        case height_feet = "Height (in feet)"
+//        case height_inches = "Height (in inches)"
+//        case birth_state = "State of Birth"
+//        case team_code = "Team Code"
+//        case birth_city = "Birth City"
+//        case high_school = "High School"
         
     }
     
@@ -40,6 +42,7 @@ class SearchViewModel {
             do {
                 let player = try JSONDecoder().decode(PlayerCodable.self, from: data)
                 self.searchedPlayer = player
+//                print(self.searchedPlayer?.height_feet)
                 completion(nil)
             } catch {
                 self.searchedPlayer = nil
@@ -95,8 +98,8 @@ class SearchViewModel {
                 return self.searchedPlayer?.team_code ?? ""
             case "birth city":
                 return self.searchedPlayer?.birth_city ?? ""
-            case "Height (in feet)":
-                return "\(self.searchedPlayer?.height_feet ?? 0)"
+            case "height":
+                return self.searchedPlayer?.height ?? ""
             case "debut date":
                 return self.searchedPlayer?.pro_debut_date ?? ""
             case "team":

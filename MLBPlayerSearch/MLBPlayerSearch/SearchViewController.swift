@@ -167,8 +167,10 @@ extension SearchViewController: UITableViewDataSource {
         if tableView == self.playerDetailView {
             let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 17)
+            cell.textLabel?.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
             cell.textLabel?.text = row.rawValue
-            cell.detailTextLabel?.text = searchViewModel.playerDetail(item: row.rawValue)
+            cell.detailTextLabel?.text = "\(searchViewModel.playerDetail(item: row.rawValue))"
             return cell
         } else {
             if indexPath.section == 0 {
