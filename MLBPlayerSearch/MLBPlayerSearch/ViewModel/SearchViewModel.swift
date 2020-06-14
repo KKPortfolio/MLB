@@ -106,7 +106,7 @@ class SearchViewModel {
                 return self.searchedPlayer?.team_full ?? ""
             case "throwing arm":
                 return self.searchedPlayer?.throwing_arm ?? ""
-            case "leage":
+            case "league":
                 return self.searchedPlayer?.league ?? ""
             case "high school":
                 return self.searchedPlayer?.high_school ?? ""
