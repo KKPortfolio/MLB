@@ -23,6 +23,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTabBar()
         setupSearchController()
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
@@ -237,5 +238,10 @@ extension SearchViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.title = "MLB Players"
+    }
+    
+    func setupTabBar(){
+        let tabBarHeight: CGFloat = 105
+        self.tabBarController?.tabBar.frame.size.height = tabBarHeight
     }
 }
