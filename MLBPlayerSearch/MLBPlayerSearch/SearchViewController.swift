@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
     
 //    MARK: Actions
     @IBAction func favorite(_ sender: UIButton) {
-        print("button clicked!")
+        
     }
     
     override func viewDidLoad() {

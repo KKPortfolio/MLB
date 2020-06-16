@@ -126,11 +126,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEB-CH-bW0">
-                                                    <rect key="frame" x="118" y="4" width="147" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                    <state key="normal" title="Click to Favorite">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEB-CH-bW0">
+                                                    <rect key="frame" x="196.5" y="11" width="21" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="heart" catalog="system">
                                                         <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <state key="selected">
@@ -144,6 +144,10 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sEB-CH-bW0" firstAttribute="centerX" secondItem="Oav-to-UCW" secondAttribute="centerX" id="L8e-X6-sXz"/>
+                                                <constraint firstItem="sEB-CH-bW0" firstAttribute="centerY" secondItem="Oav-to-UCW" secondAttribute="centerY" id="coZ-J1-oaM"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -238,6 +242,7 @@
     </scenes>
     <resources>
         <image name="favorite" width="32" height="32"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>
     </resources>
