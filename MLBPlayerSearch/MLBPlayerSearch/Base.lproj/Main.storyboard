@@ -79,6 +79,10 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Ut4-AA-1Rd" firstAttribute="centerY" secondItem="Svx-Jr-le1" secondAttribute="centerY" id="WHC-9h-wzP"/>
+                                    <constraint firstItem="Ut4-AA-1Rd" firstAttribute="top" secondItem="Svx-Jr-le1" secondAttribute="top" constant="341.5" id="ZDx-rQ-nzF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ut4-AA-1Rd" secondAttribute="trailing" constant="166" id="jV4-6O-pWF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ut4-AA-1Rd" secondAttribute="bottom" constant="341.5" id="mX9-SK-3tp"/>
+                                    <constraint firstItem="Ut4-AA-1Rd" firstAttribute="leading" secondItem="Svx-Jr-le1" secondAttribute="leading" constant="166" id="v32-qr-ihr"/>
                                     <constraint firstItem="Ut4-AA-1Rd" firstAttribute="centerX" secondItem="Svx-Jr-le1" secondAttribute="centerX" id="zMA-LW-vwU"/>
                                 </constraints>
                             </view>
@@ -86,7 +90,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="SSi-lm-dRe">
-                                    <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="143" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
@@ -115,26 +119,53 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Favorite" id="JUQ-EI-sLd">
+                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JUQ-EI-sLd" id="Oav-to-UCW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEB-CH-bW0">
+                                                    <rect key="frame" x="118" y="4" width="147" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <state key="normal" title="Click to Favorite">
+                                                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <state key="selected">
+                                                        <color key="titleColor" red="1" green="0.27058823529411763" blue="0.22745098039215686" alpha="0.78997029049295775" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="favorite:" destination="lDT-eV-i3d" eventType="touchUpInside" id="WYL-iU-0In"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="lDT-eV-i3d" id="6rj-PP-xwt"/>
                                 </connections>
                             </tableView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XJk-EQ-t9z" userLabel="recentView">
-                                <rect key="frame" x="0.0" y="194" width="375" height="532"/>
+                                <rect key="frame" x="0.0" y="194" width="414" height="619"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Zk2-KR-eAa">
-                                    <rect key="frame" x="0.0" y="99.5" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="99.5" width="414" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Recent" textLabel="Ixs-L8-5GH" detailTextLabel="dhZ-Jf-T3d" style="IBUITableViewCellStyleValue1" id="Ff2-bv-vaK">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ff2-bv-vaK" id="th4-BA-gBI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ixs-L8-5GH">
@@ -145,7 +176,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dhZ-Jf-T3d">
-                                                    <rect key="frame" x="311" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="350" y="12" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -183,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNs-os-569" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="381.60000000000002" y="-35.467980295566505"/>
+            <point key="canvasLocation" x="381.15942028985512" y="-35.491071428571423"/>
         </scene>
         <!--Search-->
         <scene sceneID="IAT-9C-q0i">

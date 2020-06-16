@@ -21,6 +21,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var recentView: UITableView!
     
+//    MARK: Actions
+    @IBAction func favorite(_ sender: UIButton) {
+        print("button clicked!")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
@@ -45,6 +50,12 @@ class SearchViewController: UIViewController {
             setupRecentView()
             recentViewAppears()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.isActive = false
+        searchViewModel.saveSearchHistory()
     }
     
 //    MARK: Functions
@@ -141,7 +152,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == self.playerDetailView {
-            return 1
+            return 2
         } else {
             return 2
         }
@@ -149,7 +160,11 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.playerDetailView {
-            return searchViewModel.numberOfRows
+            if section == 0 {
+                return searchViewModel.numberOfRows
+            } else {
+                return 1
+            }
         } else {
             if searchHistory.listOfSearches == nil {
                 return 0
@@ -166,13 +181,19 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.playerDetailView {
-            let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 17)
-            cell.textLabel?.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-            cell.textLabel?.text = row.rawValue
-            cell.detailTextLabel?.text = "\(searchViewModel.playerDetail(item: row.rawValue))"
-            return cell
+            if indexPath.section == 0 {
+                let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+                cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 17)
+                cell.textLabel?.textColor = #colorLiteral(red: 1, green: 0.2705882353, blue: 0.2274509804, alpha: 1)
+                cell.textLabel?.text = row.rawValue
+                cell.detailTextLabel?.text = "\(searchViewModel.playerDetail(item: row.rawValue))"
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
+                cell.selectionStyle = .none
+                return cell
+            }
         } else {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Recent", for: indexPath)
@@ -245,3 +266,4 @@ extension SearchViewController {
         self.tabBarController?.tabBar.frame.size.height = tabBarHeight
     }
 }
+

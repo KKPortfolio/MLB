@@ -11,7 +11,7 @@ import Foundation
 extension DateFormatter {
     static func mmmddyyyFormat(from dateString: String) -> String? {
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
 
         guard let convertedDate = defaultDateFormatter.date(from: dateString) else {
             return nil
