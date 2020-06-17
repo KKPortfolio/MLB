@@ -18,6 +18,8 @@
 		F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CCA244FD8C8002850FE /* SearchViewController.swift */; };
 		F61C9CCE244FD8C8002850FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CCC244FD8C8002850FE /* Main.storyboard */; };
 		F61C9CD3244FD8CA002850FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CD1244FD8CA002850FE /* LaunchScreen.storyboard */; };
+		F6214785249A86710086A0EE /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6214784249A86710086A0EE /* CoreDataHandler.swift */; };
+		F6214788249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6214786249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodeld */; };
 		F662B70E24995F5700D8A923 /* FavoritePlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F662B70D24995F5700D8A923 /* FavoritePlayers.swift */; };
 		F68742A0248D1A4A009990B8 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F687429F248D1A4A009990B8 /* SearchHistory.swift */; };
 		F6939A3C2453563D001D4262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6939A3B2453563D001D4262 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 		F61C9CCD244FD8C8002850FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F61C9CD2244FD8CA002850FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F61C9CD4244FD8CA002850FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6214784249A86710086A0EE /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		F6214787249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritePlayerCoreData.xcdatamodel; sourceTree = "<group>"; };
 		F662B70D24995F5700D8A923 /* FavoritePlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePlayers.swift; sourceTree = "<group>"; };
 		F687429F248D1A4A009990B8 /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		F6939A3B2453563D001D4262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		F61C9CC7244FD8C8002850FE /* MLBPlayerSearch */ = {
 			isa = PBXGroup;
 			children = (
+				F6214783249A864C0086A0EE /* CoreData */,
 				F61C9CD4244FD8CA002850FE /* Info.plist */,
 				F61C9CC8244FD8C8002850FE /* AppDelegate.swift */,
 				F61C9CCA244FD8C8002850FE /* SearchViewController.swift */,
@@ -127,8 +132,17 @@
 				68051BEC246340680041B33C /* Network */,
 				E31940D12484775B00DBA65E /* Util */,
 				68051BF624634D250041B33C /* ViewModel */,
+				F6214786249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodeld */,
 			);
 			path = MLBPlayerSearch;
+			sourceTree = "<group>";
+		};
+		F6214783249A864C0086A0EE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F6214784249A86710086A0EE /* CoreDataHandler.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,7 +216,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6214788249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodeld in Sources */,
 				F662B70E24995F5700D8A923 /* FavoritePlayers.swift in Sources */,
+				F6214785249A86710086A0EE /* CoreDataHandler.swift in Sources */,
 				68051BF0246342BA0041B33C /* NetworkManager.swift in Sources */,
 				68051BF824634D310041B33C /* SearchViewModel.swift in Sources */,
 				F68742A0248D1A4A009990B8 /* SearchHistory.swift in Sources */,
@@ -412,6 +428,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F6214786249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F6214787249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodel */,
+			);
+			currentVersion = F6214787249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodel */;
+			path = FavoritePlayerCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F61C9CBD244FD8C8002850FE /* Project object */;
 }
