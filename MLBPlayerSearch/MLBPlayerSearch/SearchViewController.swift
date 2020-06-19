@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
     var isSearched: Bool = false
     var searchViewModel = SearchViewModel()
     var searchHistory = SearchHistory()
+    var favoriteButton = FavoriteButton()
     
     @IBOutlet weak var playerDetailView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
@@ -22,34 +23,18 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var recentView: UITableView!
     
 //    MARK: Actions
-    @IBAction func favorite(_ sender: UIButton) {
-        
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
         setupSearchController()
-        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
-        if searchHistory.listOfSearches == nil {
-            setupEmptyView()
-            emptyViewAppears()
-        } else {
-            setupRecentView()
-            recentViewAppears()
-        }
+        loadEssentials()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
-        if searchHistory.listOfSearches == nil {
-            setupEmptyView()
-            emptyViewAppears()
-        } else {
-            setupRecentView()
-            recentViewAppears()
-        }
+        loadEssentials()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,24 +44,6 @@ class SearchViewController: UIViewController {
     }
     
 //    MARK: Functions
-    func emptyViewAppears(){
-        emptyView.isHidden = false
-        playerDetailView.isHidden = true
-        recentView.isHidden = true
-    }
-    
-    func tableViewAppears(){
-        emptyView.isHidden = true
-        playerDetailView.isHidden = false
-        recentView.isHidden = true
-    }
-    
-    func recentViewAppears(){
-        emptyView.isHidden = true
-        playerDetailView.isHidden = true
-        recentView.isHidden = false
-    }
-    
     func filterWords(){
         //temporarily forcing it to true to see if fetching data from API works
         //        dataUpdated = dataOriginal
@@ -191,7 +158,8 @@ extension SearchViewController: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
-                cell.selectionStyle = .none
+//                cell.selectionStyle = .none
+//                cell.addSubview(emptyButton)
                 return cell
             }
         } else {
@@ -229,6 +197,36 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController {
     //    MARK: UISetup
+    func loadEssentials(){
+        searchViewModel.coreDataHandler.loadFavorite()
+        searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
+        if searchHistory.listOfSearches == nil {
+            setupEmptyView()
+            emptyViewAppears()
+        } else {
+            setupRecentView()
+            recentViewAppears()
+        }
+    }
+    
+    func emptyViewAppears(){
+        emptyView.isHidden = false
+        playerDetailView.isHidden = true
+        recentView.isHidden = true
+    }
+    
+    func tableViewAppears(){
+        emptyView.isHidden = true
+        playerDetailView.isHidden = false
+        recentView.isHidden = true
+    }
+    
+    func recentViewAppears(){
+        emptyView.isHidden = true
+        playerDetailView.isHidden = true
+        recentView.isHidden = false
+    }
+    
     func setupTableView(){
         playerDetailView.delegate = self
         playerDetailView.dataSource = self
@@ -262,8 +260,9 @@ extension SearchViewController {
     }
     
     func setupTabBar(){
-        let tabBarHeight: CGFloat = 105
+        let tabBarHeight: CGFloat = 100
         self.tabBarController?.tabBar.frame.size.height = tabBarHeight
     }
 }
+
 

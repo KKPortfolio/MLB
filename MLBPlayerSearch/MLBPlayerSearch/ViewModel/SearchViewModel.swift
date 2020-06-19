@@ -32,12 +32,13 @@ class SearchViewModel {
 //        case high_school = "High School"
         
     }
-    
+//    MARK: Variables
     var searchedPlayer: PlayerCodable?
+    var coreDataHandler = CoreDataHandler()
     var searchTerm: String = ""
     var listOfSearches: [String] = []
 
-//    Functions
+//    MARK: Functions
     func fetchPlayer(completion: @escaping (Error?) -> ()) {
         NetworkManager.shared.execute(searchTerm: searchTerm) { data in
             do {
@@ -120,7 +121,7 @@ class SearchViewModel {
         return detail
     }
     
-    //computed variable
+//    MARK: Computed Variables
     var numberOfRows: Int {
         guard self.searchedPlayer != nil else {
             return 0
@@ -133,4 +134,11 @@ class SearchViewModel {
     }
 }
 
+//MARK: Function To Handle Core Data
+extension SearchViewModel {
+//    MARK: Functions
+    func handler(name: String){
+        
+    }
+}
 

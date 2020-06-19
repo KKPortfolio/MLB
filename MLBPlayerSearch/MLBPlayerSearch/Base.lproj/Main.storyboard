@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yk8-gO-kmf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -126,28 +125,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEB-CH-bW0">
-                                                    <rect key="frame" x="196.5" y="11" width="21" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" image="heart" catalog="system">
-                                                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <state key="selected">
-                                                        <color key="titleColor" red="1" green="0.27058823529411763" blue="0.22745098039215686" alpha="0.78997029049295775" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="favorite:" destination="lDT-eV-i3d" eventType="touchUpInside" id="WYL-iU-0In"/>
-                                                    </connections>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-GX-kje" customClass="FavoriteButton" customModule="MLBPlayerSearch" customModuleProvider="target">
+                                                    <rect key="frame" x="192" y="6.5" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="sEB-CH-bW0" firstAttribute="centerX" secondItem="Oav-to-UCW" secondAttribute="centerX" id="L8e-X6-sXz"/>
-                                                <constraint firstItem="sEB-CH-bW0" firstAttribute="centerY" secondItem="Oav-to-UCW" secondAttribute="centerY" id="coZ-J1-oaM"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -242,7 +224,6 @@
     </scenes>
     <resources>
         <image name="favorite" width="32" height="32"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>
     </resources>
