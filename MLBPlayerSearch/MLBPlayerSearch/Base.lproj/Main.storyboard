@@ -128,6 +128,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-GX-kje" customClass="FavoriteButton" customModule="MLBPlayerSearch" customModuleProvider="target">
                                                     <rect key="frame" x="192" y="6.5" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="favoriteButton:" destination="lDT-eV-i3d" eventType="touchUpInside" id="hbK-C9-6sa"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -176,6 +179,15 @@
                                     <outlet property="dataSource" destination="lDT-eV-i3d" id="s94-Rs-IXc"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Znt-qW-9js">
+                                <rect key="frame" x="49" y="600" width="316" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="Delete Favorite"/>
+                                <connections>
+                                    <action selector="deleteAllFavs:" destination="lDT-eV-i3d" eventType="touchUpInside" id="ks1-YT-TjD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>

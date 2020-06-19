@@ -23,6 +23,13 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var recentView: UITableView!
     
 //    MARK: Actions
+    @IBAction func favoriteButton(_ sender: FavoriteButton) {
+//        print("button clicked")
+        searchViewModel.coreDataHandler.saveFavorite(playerName: searchViewModel.searchTerm)
+    }
+    @IBAction func deleteAllFavs(_ sender: UIButton) {
+        searchViewModel.coreDataHandler.deleteAllFavorites()
+    }
     
     
     override func viewDidLoad() {
@@ -158,8 +165,7 @@ extension SearchViewController: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
-//                cell.selectionStyle = .none
-//                cell.addSubview(emptyButton)
+                cell.selectionStyle = .none
                 return cell
             }
         } else {
@@ -199,6 +205,7 @@ extension SearchViewController {
     //    MARK: UISetup
     func loadEssentials(){
         searchViewModel.coreDataHandler.loadFavorite()
+        print(searchViewModel.coreDataHandler.favoritePlayer.favoritePlayers)
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
             setupEmptyView()

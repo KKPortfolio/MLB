@@ -20,6 +20,7 @@ class CoreDataHandler {
         let entity = NSEntityDescription.entity(forEntityName: "FavoritePlayer", in: managedContext)!
         let player = NSManagedObject(entity: entity, insertInto: managedContext)
         player.setValue(playerName, forKey: "playerName")
+        player.setValue(true, forKey: "flag")
         
         do {
             try managedContext.save()
@@ -41,6 +42,19 @@ class CoreDataHandler {
         } catch let error as NSError {
             print("Could Not Fetch. \(error), \(error.userInfo)")
         }
+    }
+    
+    func deleteAllFavorites(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritePlayer")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        
+        do {
+            try persistentContainer.viewContext.execute(deleteRequest)
+        } catch let error as NSError {
+            print("Delete Failed. \(error), \(error.userInfo)")
+        }
+        
     }
 }
 
