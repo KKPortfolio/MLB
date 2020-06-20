@@ -11,5 +11,5 @@ import CoreData
 
 struct FavoritePlayerObject {
     var favoritePlayers: [NSManagedObject] = []
-    var playerIndex: Int = 0
+    var playerID: [Int] = []
 }

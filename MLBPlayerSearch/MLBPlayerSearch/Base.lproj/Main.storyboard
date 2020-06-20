@@ -179,13 +179,13 @@
                                     <outlet property="dataSource" destination="lDT-eV-i3d" id="s94-Rs-IXc"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Znt-qW-9js">
-                                <rect key="frame" x="49" y="600" width="316" height="72"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csQ-HD-wXd">
+                                <rect key="frame" x="148" y="600" width="123" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="Delete Favorite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Delete All"/>
                                 <connections>
-                                    <action selector="deleteAllFavs:" destination="lDT-eV-i3d" eventType="touchUpInside" id="ks1-YT-TjD"/>
+                                    <action selector="deleteAll:" destination="lDT-eV-i3d" eventType="touchUpInside" id="Crj-cq-rsV"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -44,7 +44,6 @@ class SearchViewModel {
             do {
                 let player = try JSONDecoder().decode(PlayerCodable.self, from: data)
                 self.searchedPlayer = player
-//                print(self.searchedPlayer?.height_feet)
                 completion(nil)
             } catch {
                 self.searchedPlayer = nil
