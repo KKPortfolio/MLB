@@ -176,12 +176,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mX0-GX-kje" customClass="FavouriteButton" customModule="MLBPlayerSearch" customModuleProvider="target">
-                                                    <rect key="frame" x="192" y="6.5" width="30" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-ip-Fh9" customClass="CustomFavouriteButton" customModule="MLBPlayerSearch" customModuleProvider="target">
+                                                    <rect key="frame" x="193" y="6.5" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="favouriteButton:" destination="lDT-eV-i3d" eventType="touchUpInside" id="hbK-C9-6sa"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>

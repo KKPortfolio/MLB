@@ -15,7 +15,6 @@ class SearchViewController: UIViewController {
     var isSearched: Bool = false
     var searchViewModel = SearchViewModel()
     var searchHistory = SearchHistory()
-    var favouriteButton = FavouriteButton()
     var alertMaker = ErrorAlerts()
     
     @IBOutlet weak var playerDetailView: UITableView!
@@ -32,16 +31,6 @@ class SearchViewController: UIViewController {
     }
     
 //    MARK: Actions
-    @IBAction func favouriteButton(_ sender: FavouriteButton) {
-//        guard let playerID = searchViewModel.searchedPlayer?.player_id else { return }
-//        searchViewModel.coreDataHandler.checkDuplicateEntry(playerName: searchViewModel.searchTerm, playerID: playerID)
-//        if searchViewModel.coreDataHandler.isFavorite {
-//            sender.heartFill()
-//        } else {
-//            sender.heartEmpty()
-//        }
-        searchViewModel.coreDataHandler.checkDuplicateEntry(playerObject: searchViewModel.searchedPlayer!)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,11 +166,6 @@ extension SearchViewController: UITableViewDataSource {
 //        MARK: Favourite Button
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Favourite", for: indexPath)
-                if searchViewModel.coreDataHandler.flag {
-                    favouriteButton.heartFill()
-                } else {
-                    favouriteButton.heartEmpty()
-                }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -225,11 +209,11 @@ extension SearchViewController {
     func loadEssentials(){
         searchViewModel.coreDataHandler.loadFavourite()
 //        MARK: to check if core data is properly loaded
-//        if searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count != 0{
-//            for i in 0...searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count-1{
-//                print("\(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerName")!), \(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerID")!)")
-//            }
-//        }
+        if searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count != 0{
+            for i in 0...searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count-1{
+                print("\(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerName")!), \(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerID")!)")
+            }
+        }
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
             setupEmptyView()

@@ -14,12 +14,12 @@
 		68051BF824634D310041B33C /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68051BF724634D310041B33C /* SearchViewModel.swift */; };
 		E31940D024846E1A00DBA65E /* PlayerCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31940CF24846E1A00DBA65E /* PlayerCodable.swift */; };
 		E31940D32484776B00DBA65E /* DateFormatter+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31940D22484776B00DBA65E /* DateFormatter+Util.swift */; };
+		F61419A3249F980A004550A9 /* CustomFavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61419A2249F980A004550A9 /* CustomFavouriteButton.swift */; };
 		F617EED2249AA3CA00AD0FFC /* FavouritePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617EED1249AA3CA00AD0FFC /* FavouritePlayer.swift */; };
 		F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CC8244FD8C8002850FE /* AppDelegate.swift */; };
 		F61C9CCB244FD8C8002850FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61C9CCA244FD8C8002850FE /* SearchViewController.swift */; };
 		F61C9CCE244FD8C8002850FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CCC244FD8C8002850FE /* Main.storyboard */; };
 		F61C9CD3244FD8CA002850FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61C9CD1244FD8CA002850FE /* LaunchScreen.storyboard */; };
-		F61EAC32249C69DF001468F2 /* FavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61EAC31249C69DF001468F2 /* FavouriteButton.swift */; };
 		F6214785249A86710086A0EE /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6214784249A86710086A0EE /* CoreDataHandler.swift */; };
 		F6214788249A86B60086A0EE /* FavouritePlayerCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6214786249A86B60086A0EE /* FavouritePlayerCoreData.xcdatamodeld */; };
 		F662E5D6249DC54F00F2C3F3 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F662E5D5249DC54F00F2C3F3 /* FavouriteViewController.swift */; };
@@ -35,6 +35,7 @@
 		68051BF724634D310041B33C /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		E31940CF24846E1A00DBA65E /* PlayerCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCodable.swift; sourceTree = "<group>"; };
 		E31940D22484776B00DBA65E /* DateFormatter+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Util.swift"; sourceTree = "<group>"; };
+		F61419A2249F980A004550A9 /* CustomFavouriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavouriteButton.swift; sourceTree = "<group>"; };
 		F617EED1249AA3CA00AD0FFC /* FavouritePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlayer.swift; sourceTree = "<group>"; };
 		F61C9CC5244FD8C8002850FE /* MLBPlayerSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLBPlayerSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61C9CC8244FD8C8002850FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		F61C9CCD244FD8C8002850FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F61C9CD2244FD8CA002850FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F61C9CD4244FD8CA002850FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F61EAC31249C69DF001468F2 /* FavouriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteButton.swift; sourceTree = "<group>"; };
 		F6214784249A86710086A0EE /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		F6214787249A86B60086A0EE /* FavoritePlayerCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritePlayerCoreData.xcdatamodel; sourceTree = "<group>"; };
 		F662E5D5249DC54F00F2C3F3 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +105,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		F60F65B2249F15A60080287F /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				F61419A2249F980A004550A9 /* CustomFavouriteButton.swift */,
+			);
+			path = Subclasses;
+			sourceTree = "<group>";
+		};
 		F61C9CBC244FD8C8002850FE = {
 			isa = PBXGroup;
 			children = (
@@ -124,11 +132,11 @@
 		F61C9CC7244FD8C8002850FE /* MLBPlayerSearch */ = {
 			isa = PBXGroup;
 			children = (
+				F60F65B2249F15A60080287F /* Subclasses */,
 				F662E5D4249DC52B00F2C3F3 /* ViewControllers */,
 				F6214783249A864C0086A0EE /* CoreData */,
 				F61C9CD4244FD8CA002850FE /* Info.plist */,
 				F61C9CC8244FD8C8002850FE /* AppDelegate.swift */,
-				F61EAC31249C69DF001468F2 /* FavouriteButton.swift */,
 				F6939A3B2453563D001D4262 /* Assets.xcassets */,
 				681FA9C8246370AD004EE00A /* Constant */,
 				F61C9CD1244FD8CA002850FE /* LaunchScreen.storyboard */,
@@ -232,6 +240,7 @@
 			files = (
 				F6214788249A86B60086A0EE /* FavouritePlayerCoreData.xcdatamodeld in Sources */,
 				F6214785249A86710086A0EE /* CoreDataHandler.swift in Sources */,
+				F61419A3249F980A004550A9 /* CustomFavouriteButton.swift in Sources */,
 				68051BF0246342BA0041B33C /* NetworkManager.swift in Sources */,
 				68051BF824634D310041B33C /* SearchViewModel.swift in Sources */,
 				F662E5D6249DC54F00F2C3F3 /* FavouriteViewController.swift in Sources */,
@@ -242,7 +251,6 @@
 				68051BEE246340810041B33C /* Request.swift in Sources */,
 				E31940D024846E1A00DBA65E /* PlayerCodable.swift in Sources */,
 				E31940D32484776B00DBA65E /* DateFormatter+Util.swift in Sources */,
-				F61EAC32249C69DF001468F2 /* FavouriteButton.swift in Sources */,
 				68051BF5246347680041B33C /* Player.swift in Sources */,
 				F61C9CC9244FD8C8002850FE /* AppDelegate.swift in Sources */,
 			);
