@@ -23,7 +23,6 @@ class SearchViewModel {
         case team_full = "Team"
         case pro_debut_date = "Debut Date"
         case college = "College"
-//        case favorite = "Favorite"
 //        case height_feet = "Height (in feet)"
 //        case height_inches = "Height (in inches)"
 //        case birth_state = "State of Birth"
@@ -44,6 +43,7 @@ class SearchViewModel {
             do {
                 let player = try JSONDecoder().decode(PlayerCodable.self, from: data)
                 self.searchedPlayer = player
+//                if player.player_id == 
                 completion(nil)
             } catch {
                 self.searchedPlayer = nil
@@ -111,8 +111,6 @@ class SearchViewModel {
                 return self.searchedPlayer?.league ?? ""
             case "high school":
                 return self.searchedPlayer?.high_school ?? ""
-//            case "favorite":
-//                return ""
             default:
                 return "No Value"
             }

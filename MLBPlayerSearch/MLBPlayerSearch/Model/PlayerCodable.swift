@@ -39,6 +39,7 @@ struct PlayerCodable: Decodable {
     let service_years: Int?
     let active_sw: String?
     var height: String = ""
+    var isFavourite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case searchPlayerAll = "search_player_all"

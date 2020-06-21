@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
     var isSearched: Bool = false
     var searchViewModel = SearchViewModel()
     var searchHistory = SearchHistory()
-    var favoriteButton = FavoriteButton()
+    var favouriteButton = FavouriteButton()
     var alertMaker = ErrorAlerts()
     
     @IBOutlet weak var playerDetailView: UITableView!
@@ -23,20 +23,24 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var recentView: UITableView!
     
-//    MARK: Actions
-    @IBAction func favoriteButton(_ sender: FavoriteButton) {
-        guard let playerID = searchViewModel.searchedPlayer?.player_id else { return }
-        searchViewModel.coreDataHandler.checkDuplicateEntry(playerName: searchViewModel.searchTerm, playerID: playerID)
-        if searchViewModel.coreDataHandler.alreadyFavorite {
-            alertMaker.makeAlertController(title: "Error", message: "Player is already in Favorite!")
-            alertMaker.addAction(title: "Got It!")
-            DispatchQueue.main.async {
-                self.present(self.alertMaker.alertController!, animated: true)
-            }
-        }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    @IBAction func deleteAll(_ sender: UIButton) {
-        searchViewModel.coreDataHandler.deleteAllFavorites()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+//    MARK: Actions
+    @IBAction func favouriteButton(_ sender: FavouriteButton) {
+//        guard let playerID = searchViewModel.searchedPlayer?.player_id else { return }
+//        searchViewModel.coreDataHandler.checkDuplicateEntry(playerName: searchViewModel.searchTerm, playerID: playerID)
+//        if searchViewModel.coreDataHandler.isFavorite {
+//            sender.heartFill()
+//        } else {
+//            sender.heartEmpty()
+//        }
+        searchViewModel.coreDataHandler.checkDuplicateEntry(playerObject: searchViewModel.searchedPlayer!)
     }
     
     override func viewDidLoad() {
@@ -160,6 +164,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        MARK: Player Detail Table View
         if tableView == self.playerDetailView {
             if indexPath.section == 0 {
                 let row = SearchViewModel.PlayerInfo.allCases[indexPath.row]
@@ -169,8 +174,14 @@ extension SearchViewController: UITableViewDataSource {
                 cell.textLabel?.text = row.rawValue
                 cell.detailTextLabel?.text = "\(searchViewModel.playerDetail(item: row.rawValue))"
                 return cell
+//        MARK: Favourite Button
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Favorite", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Favourite", for: indexPath)
+                if searchViewModel.coreDataHandler.flag {
+                    favouriteButton.heartFill()
+                } else {
+                    favouriteButton.heartEmpty()
+                }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -181,6 +192,7 @@ extension SearchViewController: UITableViewDataSource {
                 cell.textLabel?.font = UIFont (name: "Helvetica-Bold", size: 24)
                 cell.detailTextLabel?.text = ""
                 return cell
+//         MARK: Recent Search Players
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Recent", for: indexPath)
                 cell.textLabel?.text = searchHistory.listOfSearches![indexPath.row]
@@ -195,6 +207,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == playerDetailView {
             self.playerDetailView.deselectRow(at: indexPath, animated: true)
+//            MARK: when recent player table cell is clicked
         } else if tableView == recentView {
             self.recentView.deselectRow(at: indexPath, animated: true)
             searchController.isActive = true
@@ -210,17 +223,13 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController {
     //    MARK: UISetup
     func loadEssentials(){
-        searchViewModel.coreDataHandler.loadFavorite()
-//        MARK: to check if data is properly loaded
-        if searchViewModel.coreDataHandler.favoritePlayer.favoritePlayers.count != 0{
-            for i in 0...searchViewModel.coreDataHandler.favoritePlayer.favoritePlayers.count-1{
-                print(searchViewModel.coreDataHandler.favoritePlayer.favoritePlayers[i].value(forKey: "playerName")!)
-                print(searchViewModel.coreDataHandler.favoritePlayer.favoritePlayers[i].value(forKey: "playerID")!)
-            }
-        } else {
-            print("no favs yet")
-        }
-//
+        searchViewModel.coreDataHandler.loadFavourite()
+//        MARK: to check if core data is properly loaded
+//        if searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count != 0{
+//            for i in 0...searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers.count-1{
+//                print("\(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerName")!), \(searchViewModel.coreDataHandler.favouritePlayer.favouritePlayers[i].value(forKey: "playerID")!)")
+//            }
+//        }
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
         if searchHistory.listOfSearches == nil {
             setupEmptyView()
