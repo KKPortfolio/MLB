@@ -13,9 +13,9 @@ import UIKit
 class CoreDataHandler {
     
     var favouritePlayer = FavouritePlayerObject()
-    var flag: Bool = false
-    
-    func saveFavourite(playerName: String, playerID: Int){
+    var playerIDNeedsCheck: Int = 0
+
+    func saveObject(playerName: String, playerID: Int){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "FavouritePlayer", in: managedContext)!
@@ -27,7 +27,7 @@ class CoreDataHandler {
         do {
             try managedContext.save()
             favouritePlayer.favouritePlayers.append(player)
-//            print("save complete")
+            print("save complete")
         } catch let error as NSError {
             print("Could Not Save. \(error), \(error.userInfo)")
         }
@@ -40,6 +40,7 @@ class CoreDataHandler {
         
         do {
             favouritePlayer.favouritePlayers = try managedContext.fetch(fetchRequest)
+            print("load complete")
         } catch let error as NSError {
             print("Could Not Fetch. \(error), \(error.userInfo)")
         }
@@ -57,54 +58,31 @@ class CoreDataHandler {
         }
     }
     
-//    func checkDuplicateEntry(playerName: String, playerID: Int){
-//        flag = false
-//        loadFavourite()
-//        if favouritePlayer.favouritePlayers.count == 0 {
-//            saveFavourite(playerName: playerName, playerID: playerID)
-//            
-//            return
-//        } else {
-//            for i in 0...favouritePlayer.favouritePlayers.count-1 {
-//                favouritePlayer.playerID.append(favouritePlayer.favouritePlayers[i].value(forKey: "playerID") as! Int)
-//            }
-//        }
-//        
-//        if let index = favouritePlayer.playerID.firstIndex(of: playerID){
-//            
-//        } else {
-//            saveFavourite(playerName: playerName, playerID: playerID)
-//            flag = true
-//        }
-//    }
-    
-    func checkDuplicateEntry(playerObject: PlayerCodable){
+    func isItFavourite() -> Bool {
         loadFavourite()
-        flag = false
-        guard let playerName = playerObject.name_display_first_last else { return }
-        guard let playerID = playerObject.player_id else { return }
         if favouritePlayer.favouritePlayers.count == 0 {
-            saveFavourite(playerName: playerName, playerID: playerID)
-            flag = true
-            return
+            return false
         } else {
             favouritePlayer.playerID.removeAll()
             for i in 0...favouritePlayer.favouritePlayers.count-1 {
                 favouritePlayer.playerID.append(favouritePlayer.favouritePlayers[i].value(forKey: "playerID") as! Int)
             }
         }
-        isFavourite(playerID: playerID)
-        if !flag {
-            saveFavourite(playerName: playerName, playerID: playerID)
-            flag = true
+        
+        if let index = favouritePlayer.playerID.firstIndex(of: playerIDNeedsCheck) {
+            return true
+        } else {
+            return false
         }
     }
     
-    func isFavourite(playerID: Int){
-        if let index = favouritePlayer.playerID.firstIndex(of: playerID){
-            flag = true
+    func saveFavourite(playerObject: PlayerCodable){
+        guard let playerName = playerObject.name_display_first_last else { return }
+        guard let playerID = playerObject.player_id else { return }
+        if isItFavourite(){
+            return
         } else {
-            flag = false
+            saveObject(playerName: playerName, playerID: playerID)
         }
     }
 }

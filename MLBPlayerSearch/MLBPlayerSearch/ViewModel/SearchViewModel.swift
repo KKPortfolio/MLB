@@ -43,7 +43,7 @@ class SearchViewModel {
             do {
                 let player = try JSONDecoder().decode(PlayerCodable.self, from: data)
                 self.searchedPlayer = player
-//                if player.player_id == 
+                self.coreDataHandler.playerIDNeedsCheck = self.searchedPlayer?.player_id ?? 0
                 completion(nil)
             } catch {
                 self.searchedPlayer = nil

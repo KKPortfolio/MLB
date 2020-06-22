@@ -16,6 +16,7 @@ class SearchViewController: UIViewController {
     var searchViewModel = SearchViewModel()
     var searchHistory = SearchHistory()
     var alertMaker = ErrorAlerts()
+    var favouriteButton = CustomFavouriteButton()
     
     @IBOutlet weak var playerDetailView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
@@ -31,6 +32,7 @@ class SearchViewController: UIViewController {
     }
     
 //    MARK: Actions
+//    MARK: Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +47,11 @@ class SearchViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("view will disappear \(favouriteButton.isFavourite)")
         searchController.isActive = false
         searchViewModel.saveSearchHistory()
     }
-    
-//    MARK: Functions
+
     func filterWords(){
         //temporarily forcing it to true to see if fetching data from API works
         //        dataUpdated = dataOriginal
@@ -93,6 +95,7 @@ extension SearchViewController: UISearchBarDelegate {
             searchController.isActive = true
             searchBar.text = searchViewModel.searchTerm
             fetchingPlayers()
+            print("search button clicked \(favouriteButton.isFavourite)")
             filterWords()
             if isSearched {
                 setupTableView()
@@ -112,6 +115,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel button clicked \(favouriteButton.isFavourite)")
         searchController.isActive = false
         searchViewModel.saveSearchHistory()
         searchHistory.listOfSearches = searchViewModel.loadSearchHistory()?.suffix(5)
@@ -167,6 +171,15 @@ extension SearchViewController: UITableViewDataSource {
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Favourite", for: indexPath)
                 cell.selectionStyle = .none
+                favouriteButton.isFavourite = searchViewModel.coreDataHandler.isItFavourite()
+                if favouriteButton.isFavourite{
+                    favouriteButton.isOn = true
+                    favouriteButton.fillHeart()
+                    cell.contentView.addSubview(favouriteButton)
+                } else {
+                    favouriteButton.emptyHeart()
+                    cell.contentView.addSubview(favouriteButton)
+                }
                 return cell
             }
         } else {
